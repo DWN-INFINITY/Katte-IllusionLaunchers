@@ -409,18 +409,18 @@ namespace InitSetting
             // Sideloader Modpack Maintainer Mode
             SideloaderMaintainerMode = Directory.Exists($"{GameRootDirectory}\\mods.prod") || Directory.Exists($"{GameRootDirectory}\\mods.test");
 
-            // Framework test
-            IsIpa = File.Exists($"{GameRootDirectory}\\IPA.exe");
-            IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx");
+            //Framework test
+            //IsIpa = File.Exists($"{GameRootDirectory}\\IPA.exe");
+            //IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx");
 
-            if (IsIpa && IsBepIn)
-            {
-                MessageBox.Show(
-                    "Both BepInEx and IPA is detected in the game folder!\n\nApplying both frameworks may cause permanent problems when running the game, making a reinstall needed. Consider uninstalling IPA and using the BepInEx.IPALoader plugin to run your IPA plugins instead.\n\nExiting launcher.",
-                    "Critical!");
+            //if (IsIpa && IsBepIn)
+            //{
+            //  MessageBox.Show(
+            //      "Both BepInEx and IPA is detected in the game folder!\n\nApplying both frameworks may cause permanent problems when running the game, making a reinstall needed. Consider uninstalling IPA and using the BepInEx.IPALoader plugin to run your IPA plugins instead.\n\nExiting launcher.",
+            //      "Critical!");
 
-                System.Windows.Application.Current.Shutdown();
-            }
+            //   System.Windows.Application.Current.Shutdown();
+            //}
 
             // Updater / kkmanager
             try

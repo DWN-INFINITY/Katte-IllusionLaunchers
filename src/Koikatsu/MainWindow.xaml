@@ -202,7 +202,7 @@
                 <Image x:Name="idmssage4" Source="/InitSetting;component/images/ButtonBG/manual.png"
                        RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" />
             </Border>
-            <Label x:Name="labelM" Foreground="White" VerticalContentAlignment="Center" Content="Game Manual"
+            <Label x:Name="labelM" Foreground="White" VerticalContentAlignment="Center" Content="{x:Static local:Localizable.ManualGame}"
                    HorizontalAlignment="Left" Margin="137,63,0,0" VerticalAlignment="Top" Height="24" Width="134" />
             <Button Style="{StaticResource buttonHover}" x:Name="buttonManual" Content="" HorizontalAlignment="Left"
                     Height="24" Margin="131,63,0,0" VerticalAlignment="Top" Width="174" Click="buttonManual_Click" />
@@ -243,7 +243,7 @@
                 <StackPanel Margin="5,5,5,5" x:Name="Toggleables" Orientation="Vertical">
                     <CheckBox x:Name="toggleFullscreen" Content="{x:Static local:Localizable.ToggleFullscreen}"
                               Foreground="White" Checked="FullscreenChecked" Unchecked="FullscreenUnChecked" />
-                    <CheckBox x:Name="toggleSFW" Content="Disable NSFW Content"
+                    <CheckBox x:Name="toggleSFW" Content="{x:Static local:Localizable.ToggleNSFW}"
                               Foreground="White" />
                 </StackPanel>
             </Border>
@@ -355,6 +355,18 @@
                        Margin="-0.083,0,0,-0.667" VerticalAlignment="Top" Width="190"
                        MouseLeftButtonDown="update_MouseLeftButtonDown" />
         </Grid>
-
+        <Grid x:Name="gridManager" HorizontalAlignment="Left" Height="36.333" Margin="154.333,78.286,0,0"
+              VerticalAlignment="Top" Width="147.5" Grid.Row="1">
+            <Border BorderBrush="#FF366EBF" Background="Black" BorderThickness="2"
+                    Height="37" Margin="0,0,1.583,-0.667" VerticalAlignment="Top" CornerRadius="20" HorizontalAlignment="Right" Width="145.5">
+                <Label x:Name="labelManager" Content="{x:Static local:Localizable.ButtonManager}" Foreground="White"
+                       VerticalContentAlignment="Center" Padding="25,0,0,0" HorizontalAlignment="Right" Width="146" />
+            </Border>
+            <Image x:Name="imasge4" Height="28" Margin="105.084,5,0,0"
+                   VerticalAlignment="Top" Source="images/Chikarin.png" HorizontalAlignment="Left" Width="25" />
+            <Rectangle x:Name="linkManager" Fill="Transparent" HorizontalAlignment="Left" Height="37"
+                       Margin="-0.083,0,0,-0.667" VerticalAlignment="Top" Width="146"
+                       MouseLeftButtonDown="manager_MouseLeftButtonDown" />
+        </Grid>
     </Grid>
 </Window>

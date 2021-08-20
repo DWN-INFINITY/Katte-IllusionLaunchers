@@ -278,6 +278,10 @@ namespace InitSetting
                         LangQ_a = "Ønsker du å endre språket i spillet også?";
                         LangQ_b = "Spørsmål";
                         break;
+                    case "ru":
+                        LangQ_a = "Установить в игре язык, который выбран в лаунчере?";
+                        LangQ_b = "вопрос";
+                        break;
                     default:
                         LangQ_a = "Do you want to set the ingame language to the selected language as well?";
                         LangQ_b = "Question";
@@ -304,8 +308,8 @@ namespace InitSetting
                                 !File.Exists(
                                     $"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/DisableGoogle.txt"))
                         {
-                            
-                                MessageBox.Show(Localizable.InstructDecideLang);
+                            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+                            MessageBox.Show(Localizable.InstructDecideLang);
                         }
 
                         WriteAutoTranslatorLangIni(language);
@@ -335,7 +339,17 @@ namespace InitSetting
             try
             {
                 var contents = (File.Exists(configPath) ? File.ReadAllLines(configPath) : Enumerable.Empty<string>()).ToList();
+                string TransService = String.Empty;
+                string Font = String.Empty;
+                string TextMeshFont = String.Empty;
 
+                TransService = language == "ko" ? "PapagoTranslate" : "GoogleTranslate";
+                if (language == "ru") Font = "Times New Roman";
+
+                TextMeshFont = (language == "ko" || language == "zh-CN" || language == "zh-TW") 
+                               && File.Exists($@"{EnvironmentHelper.GameRootDirectory}\BepInEx\Translation\fonts\notosanscjk-regular_sdf") ? $@"BepInEx\Translation\fonts\notosanscjk-regular_sdf" : String.Empty;
+
+                // Setting language
                 {
                     var categoryIndex = contents.FindIndex(s => s.ToLower().Contains("[General]".ToLower()));
                     if (categoryIndex >= 0)
@@ -353,14 +367,14 @@ namespace InitSetting
                         contents.Add($"Language={language}");
                     }
                 }
-
+                // Setting Translation Service
                 {
                     var categoryIndex = contents.FindIndex(s => s.ToLower().Contains("[Service]".ToLower()));
                     if (categoryIndex >= 0)
                     {
                         var i = contents.FindIndex(categoryIndex, s => s.StartsWith("Endpoint"));
                         if (i > categoryIndex)
-                            contents[i] = disable ? "Endpoint=" : "Endpoint=GoogleTranslate";
+                            contents[i] = disable ? "Endpoint=" : $"Endpoint={TransService}";
                         else
                             contents.Insert(categoryIndex + 1, disable ? "Endpoint=" : "Endpoint=GoogleTranslate");
                     }
@@ -368,7 +382,39 @@ namespace InitSetting
                     {
                         contents.Add("");
                         contents.Add("[Service]");
-                        contents.Add(disable ? "Endpoint=" : "Endpoint=GoogleTranslate");
+                        contents.Add(disable ? "Endpoint=" : $"Endpoint={TransService}");
+                    }
+                }
+                // Setting font
+                {
+                    var categoryIndex = contents.FindIndex(s => s.ToLower().Contains("[Behaviour]".ToLower()));
+                    if (categoryIndex >= 0)
+                    {
+                        var i = contents.FindIndex(categoryIndex, s => s.StartsWith("OverrideFont"));
+                        if (i > categoryIndex)
+                            contents[i] = $"OverrideFont={Font}";
+                    }
+                    else
+                    {
+                        contents.Add("");
+                        contents.Add("[Behaviour]");
+                        contents.Add(disable ? "OverrideFont=" : $"OverrideFont={Font}");
+                    }
+                }
+                // Setting TextMeshfont
+                {
+                    var categoryIndex = contents.FindIndex(s => s.ToLower().Contains("[Behaviour]".ToLower()));
+                    if (categoryIndex >= 0)
+                    {
+                        var i = contents.FindIndex(categoryIndex, s => s.StartsWith("OverrideFontTextMeshPro"));
+                        if (i > categoryIndex)
+                            contents[i] = $"OverrideFontTextMeshPro={TextMeshFont}";
+                    }
+                    else
+                    {
+                        contents.Add("");
+                        contents.Add("[Behaviour]");
+                        contents.Add(disable ? "OverrideFontTextMeshPro=" : $"OverrideFontTextMeshPro={TextMeshFont}");
                     }
                 }
 
@@ -648,6 +694,27 @@ namespace InitSetting
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to start the updater: " + ex, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public static bool StartManager()
+        {
+            try
+            {
+                var gameRoot = Path.GetFullPath(GameRootDirectory).TrimEnd('\\', '/', ' ');
+                var updaterPath = Path.Combine(_kkmanagerDirectory, "KKManager.exe");
+
+                if (!File.Exists(updaterPath))
+                    throw new FileNotFoundException("Could not find KKManager", updaterPath);
+
+                var args = $"\"{gameRoot}\" {_updateSourcesOverride}";
+
+                return StartProcess(new ProcessStartInfo(updaterPath) { WorkingDirectory = _kkmanagerDirectory, Arguments = args }) != null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to start the KKManager: " + ex, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }

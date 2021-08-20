@@ -118,9 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Disclaimer" xml:space="preserve">
-    <value>このゲームは成人向けので、18歳未満（または地域の法律によりと同等の年齢）がこのゲームをプレイまたは所有しているができない。
-
-このゲームには性的内容の内容が含まれます。内に描かれている行動は、実生活で複製することは違法です。つまり、これは面白いゲームです、そうしましょう？(~.~)v</value>
+    <value>楽しんでください、あなたは道徳的なレッスンを必要としません。</value>
   </data>
   <data name="FolderInstall" xml:space="preserve">
     <value>インストール</value>

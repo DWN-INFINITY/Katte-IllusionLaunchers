@@ -171,10 +171,8 @@
   <data name="Distribution" xml:space="preserve">
     <value>Método de Instalación Desconocido</value>
   </data>
-  <data name="Disclaimer" xml:space="preserve">
-    <value>Este juego está dirigido hacia un público adulto, ninguna persona bajo 18 años (o equivalente según las leyes locales) no deberían de jugar o estar en posesión de este juego. 
-
-Este juego contiene escenas de carácter sexual, y algunas de las acciones representadas en el mismo pueden ser ilegales de hacerlas en la vida real.  También conocido como, todo es diversión y risas dentro del juego, así que mantengámoslo así, ¿vale? (~.~)v</value>
+  <data name="" xml:space="preserve">
+    <value>Diviértete, no necesitas una lección moral.</value>
   </data>
   <data name="TranslatedByCredit" xml:space="preserve">
     <value>Traducido por: Heroine Nisa</value>

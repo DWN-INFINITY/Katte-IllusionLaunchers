@@ -189,7 +189,7 @@
         <Grid HorizontalAlignment="Left" Height="491" Margin="576,107,0,0" VerticalAlignment="Top" Width="322"
               Grid.Row="0" Grid.RowSpan="2">
             
-            <Grid HorizontalAlignment="Left" Height="329" Margin="10,19,0,0" VerticalAlignment="Top" Width="302">
+            <Grid HorizontalAlignment="Left" Height="45" Margin="10,19,0,0" VerticalAlignment="Top" Width="302">
                 <Border BorderBrush="#FF7D8118" Background="#CC000000" BorderThickness="2" HorizontalAlignment="Left"
                         Height="197" Margin="10,10,0,0" VerticalAlignment="Top" Width="282" CornerRadius="3">
                     <TextBlock Foreground="White" x:Name="warningText" TextWrapping="Wrap" Margin="8">

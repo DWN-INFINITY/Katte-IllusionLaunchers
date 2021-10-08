@@ -74,13 +74,6 @@ namespace InitSetting
                 if (EnvironmentHelper.CustomBgImage != null)
                     appBG.ImageSource = EnvironmentHelper.CustomBgImage;
 
-                if (string.IsNullOrEmpty(EnvironmentHelper.PatreonUrl))
-                {
-                    linkPatreon.Visibility = Visibility.Collapsed;
-                    patreonBorder.Visibility = Visibility.Collapsed;
-                    patreonIMG.Visibility = Visibility.Collapsed;
-                }
-
                 var primaryDisplay = Localizable.PrimaryDisplay;
                 var subDisplay = Localizable.SubDisplay;
                 for (var i = 0; i < Screen.AllScreens.Length; i++)

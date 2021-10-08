@@ -109,9 +109,9 @@ namespace InitSetting {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to This game is intended for adult audiences, no person under the age of 18 (or equivalent according to local law) are supposed to play or be in possession of this game.
+        ///   Looks up a localized string similar to 
+        ///   Have fun with the girls.
         ///
-        ///This game contains content of a sexual nature, and some of the actions depicted within may be illegal to replicate in real life. Aka, it&apos;s all fun and games in the game, let&apos;s keep it that way shall we? (~.~)v.
         /// </summary>
         public static string Disclaimer {
             get {

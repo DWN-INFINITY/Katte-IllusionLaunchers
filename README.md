@@ -1,7 +1,8 @@
 # IllusionLaunchers
-Launchers for various Japanese adult games from Illusion
+Launchers for various Japanese adult games from Illusion, but stripped from some useless disclaimers or patronage links.
+A tool made to be more a tool.
 
-![Screenshot](https://i.imgur.com/xPuI2Dp.png "Screenshot")
+![Screenshot](https://i.imgur.com/6KvRJr5.png "Screenshot")
 
 # Features
 - Fixes corrupt setup.xml on launch.
@@ -26,10 +27,7 @@ Create a folder in UserData named LauncherEN, and place a file named LauncherBG.
 ### Character Image
 Create a folder in UserData named LauncherEN, and place a file named Chara.png there. The image should be 250 x 370 large.
 
-### Patreon
-Create a folder in UserData named LauncherEN, and place a file named patreon.txt there. File should include a single URL.
-
 ### Supported Languages
 Languages can be switched at any time in the launcher. The following languages are supported:
 
-English, Chinese, Korean, Spanish, Brazilian, French, German, Norwegian (Bokmål) and Russian
+English, Chinese (traditional and mainland), Korean, Spanish, Portuguese (Brazilian), French, German, Norwegian (Bokmål) and Russian

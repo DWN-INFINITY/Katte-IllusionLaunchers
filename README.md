@@ -1,5 +1,5 @@
 # IllusionLaunchers
-Launchers for various Japanese adult games from Illusion, but stripped from some useless disclaimers or patronage links.
+Launchers for various Japanese adult games from Illusion, but useless disclaimers were stripped, also with some customization.
 A tool made to be more a tool.
 
 ![Screenshot](https://i.imgur.com/6KvRJr5.png "Screenshot")

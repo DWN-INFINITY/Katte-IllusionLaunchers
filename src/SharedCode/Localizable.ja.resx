@@ -256,4 +256,7 @@
   <data name="ButtonManager" xml:space="preserve">
     <value>マネジャー</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>カードディレクトリ</value>
+  </data>
 </root>

@@ -687,5 +687,11 @@ namespace InitSetting {
                 return ResourceManager.GetString("WindowTitle", resourceCulture);
             }
         }
-	}
+
+        public static string CardHub {
+            get {
+                return ResourceManager.GetString("CardHub", resourceCulture);
+            }
+        }
+    }
 }

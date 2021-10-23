@@ -274,4 +274,7 @@
   <data name="ToggleNSFW" xml:space="preserve">
     <value>후방주의 콘텐츠 비활성화</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>카드 디렉토리</value>
+  </data>
 </root>

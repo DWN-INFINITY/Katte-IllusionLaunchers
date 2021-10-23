@@ -326,6 +326,20 @@ namespace InitSetting
             EnvironmentHelper.OpenDirectory("UserData\\chara\\male");
         }
 
+        private void bepisdb_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://db.bepis.io/aishoujo");
+        }
+
+        private void ilbooru_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://illusioncards.booru.org/index.php?page=post&s=list&tags=ai_shoujo");
+        }
+
+        private void kenzato_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kenzato.uk/booru/category/AICARD");
+        }
         #endregion
     }
 }

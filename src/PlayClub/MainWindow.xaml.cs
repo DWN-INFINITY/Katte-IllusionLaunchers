@@ -70,19 +70,19 @@ namespace InitSetting
                     PackChara.Source = EnvironmentHelper.CustomCharacterImage;
                 if (EnvironmentHelper.CustomBgImage != null)
                     appBG.ImageSource = EnvironmentHelper.CustomBgImage;
-
+                /*
                 if (string.IsNullOrEmpty(EnvironmentHelper.PatreonUrl))
                 {
                     linkPatreon.Visibility = Visibility.Collapsed;
                     patreonBorder.Visibility = Visibility.Collapsed;
                     patreonIMG.Visibility = Visibility.Collapsed;
                 }
-
+                
                 if (string.IsNullOrEmpty(SupportDiscord))
                 {
                     gridDiscord.Visibility = Visibility.Collapsed;
                 }
-
+                */
                 //if (!EnvironmentHelper.IsBepIn)
                 //{
                 //    languageborder.Visibility = Visibility.Collapsed;

@@ -254,4 +254,7 @@ HoneyPot Inspector</value>
   <data name="ToggleTouchyFeely" xml:space="preserve">
     <value>Activar TouchyFeely (Boop)</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>Directorios de cartas</value>
+  </data>
 </root>

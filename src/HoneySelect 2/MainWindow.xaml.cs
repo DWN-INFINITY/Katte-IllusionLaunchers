@@ -70,14 +70,14 @@ namespace InitSetting
                     PackChara.Source = EnvironmentHelper.CustomCharacterImage;
                 if (EnvironmentHelper.CustomBgImage != null)
                     appBG.ImageSource = EnvironmentHelper.CustomBgImage;
-
+                /*
                 if (string.IsNullOrEmpty(EnvironmentHelper.PatreonUrl))
                 {
                     linkPatreon.Visibility = Visibility.Collapsed;
                     patreonBorder.Visibility = Visibility.Collapsed;
                     patreonIMG.Visibility = Visibility.Collapsed;
                 }
-
+                */
                 var primaryDisplay = Localizable.PrimaryDisplay;
                 var subDisplay = Localizable.SubDisplay;
                 for (var i = 0; i < Screen.AllScreens.Length; i++)
@@ -369,6 +369,20 @@ namespace InitSetting
             EnvironmentHelper.OpenDirectory("UserData\\chara\\male");
         }
 
+        private void bepisdb_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://db.bepis.io/aishoujo");
+        }
+
+        private void ilbooru_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://illusioncards.booru.org/index.php?page=post&s=list&tags=honey_select_2");
+        }
+
+        private void kenzato_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kenzato.uk/booru/category/HS2");
+        }
         #endregion
     }
 }

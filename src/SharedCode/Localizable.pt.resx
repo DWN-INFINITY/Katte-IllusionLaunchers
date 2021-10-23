@@ -265,4 +265,7 @@
   <data name="ToggleNSFW" xml:space="preserve">
     <value>Desabilitar Conteúdo Sexual</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>Consiga mais cartas</value>
+  </data>
 </root>

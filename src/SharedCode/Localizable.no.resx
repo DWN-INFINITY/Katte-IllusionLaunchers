@@ -253,4 +253,7 @@
   <data name="ToggleTouchyFeely" xml:space="preserve">
     <value>Aktiver TouchyFeely (Boop)</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>Kortkatalog</value>
+  </data>
 </root>

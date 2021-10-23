@@ -58,11 +58,11 @@ namespace InitSetting
 
                 if (!EnvironmentHelper.KKmanExist)
                     gridUpdate.Visibility = Visibility.Hidden;
-
+                /*
                 // Launcher Customization: Defining Warning, background and character
                 if (!string.IsNullOrEmpty(EnvironmentHelper.VersionString))
                     labelDist.Content = EnvironmentHelper.VersionString;
-
+                */
                 if (!string.IsNullOrEmpty(EnvironmentHelper.WarningString))
                     warningText.Text = EnvironmentHelper.WarningString;
 
@@ -70,14 +70,14 @@ namespace InitSetting
                     PackChara.Source = EnvironmentHelper.CustomCharacterImage;
                 if (EnvironmentHelper.CustomBgImage != null)
                     appBG.ImageSource = EnvironmentHelper.CustomBgImage;
-
+                /*
                 if (string.IsNullOrEmpty(EnvironmentHelper.PatreonUrl))
                 {
                     linkPatreon.Visibility = Visibility.Collapsed;
                     patreonBorder.Visibility = Visibility.Collapsed;
                     patreonIMG.Visibility = Visibility.Collapsed;
                 }
-
+                */
                 var primaryDisplay = Localizable.PrimaryDisplay;
                 var subDisplay = Localizable.SubDisplay;
                 for (var i = 0; i < Screen.AllScreens.Length; i++)
@@ -127,6 +127,20 @@ namespace InitSetting
             EnvironmentHelper.OpenDirectory("UserData\\pose\\data");
         }
 
+        private void bepisdb_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://db.bepis.io/koikatsu");
+        }
+
+        private void ilbooru_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://illusioncards.booru.org/index.php?page=post&s=list&tags=koikatsu");
+        }
+
+        private void kenzato_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kenzato.uk/booru/category/KK");
+        }
         #endregion
 
         #region Display settings

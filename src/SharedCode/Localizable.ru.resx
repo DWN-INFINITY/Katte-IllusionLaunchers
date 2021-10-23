@@ -333,4 +333,7 @@
 Может вызывать некоторые проблемы с
 одеждой, не оптимизированной под этот мод.</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>Карточные каталоги</value>
+  </data>
 </root>

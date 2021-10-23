@@ -342,4 +342,7 @@ for this modification.</value>
   <data name="ButtonManager" xml:space="preserve">
     <value>Manager</value>
   </data>
+  <data name="CardHub" xml:space="preserve">
+    <value>Get more cards</value>
+  </data>
 </root>

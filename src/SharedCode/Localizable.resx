@@ -342,10 +342,9 @@ for this modification.</value>
   <data name="ButtonManager" xml:space="preserve">
     <value>Manager</value>
   </data>
-<<<<<<< HEAD
   <data name="CardHub" xml:space="preserve">
     <value>Get more cards</value>
-=======
+  </data>  
   <data name="BetterAA" xml:space="preserve">
     <value>Activate Better Anti-Aliasing</value>
   </data>
@@ -354,6 +353,5 @@ for this modification.</value>
   </data>
   <data name="MessageBoxGraphicsMod" xml:space="preserve">
     <value>To use this mod, Press F5 during the game.</value>
->>>>>>> upstream/master
   </data>
 </root>

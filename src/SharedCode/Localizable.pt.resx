@@ -265,7 +265,18 @@
   <data name="ToggleNSFW" xml:space="preserve">
     <value>Desabilitar Conteúdo Sexual</value>
   </data>
+<<<<<<< HEAD
   <data name="CardHub" xml:space="preserve">
     <value>Consiga mais cartas</value>
+=======
+  <data name="BetterAA" xml:space="preserve">
+    <value>Ativar Better Anti-Aliasing</value>
+  </data>
+  <data name="MessageBoxDHH" xml:space="preserve">
+    <value>Para usar este Mod, pressione P durante o jogo</value>
+  </data>
+  <data name="MessageBoxGraphicsMod" xml:space="preserve">
+    <value>Para usar este Mod, pressione F5 durante o jogo</value>
+>>>>>>> upstream/master
   </data>
 </root>

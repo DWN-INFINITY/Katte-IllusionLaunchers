@@ -19,7 +19,7 @@ namespace InitSetting
     public static class EnvironmentHelper
     {
         private static readonly string _mStrSaveDir = "/UserData/setup.xml";
-        private static readonly string _mCustomDir = "/UserData/LauncherEN";
+        private static readonly string _mCustomDir = "/BepInEx/LauncherEN";
         private static readonly string _decideLang = "/lang";
         private static readonly string _versioningLoc = "/version";
         private static readonly string _warningLoc = "/warning.txt";
@@ -344,10 +344,19 @@ namespace InitSetting
                 string TextMeshFont = String.Empty;
 
                 TransService = language == "ko" ? "PapagoTranslate" : "GoogleTranslateV2";
-                if (language == "ru") Font = "Times New Roman";
 
-                TextMeshFont = (language == "ko" || language == "zh-CN" || language == "zh-TW") 
-                               && File.Exists($@"{EnvironmentHelper.GameRootDirectory}\BepInEx\Translation\fonts\arialuni_sdf_u2018") ? $@"BepInEx\Translation\fonts\arialuni_sdf_u2018" : String.Empty;
+                if (language == "ru") Font = $@"Times New Roman";
+                else if (language == "zh-CN" || language == "zh-TW") Font = $@"MS Gothic";
+                else Font = String.Empty;
+
+                // TextMeshFont = (language == "ko" || language == "zh-CN" || language == "zh-TW") 
+                //               && File.Exists($@"{EnvironmentHelper.GameRootDirectory}\BepInEx\Translation\fonts\arialuni_sdf_u2018") ? $@"BepInEx\Translation\fonts\arialuni_sdf_u2018" : String.Empty;
+
+                if (File.Exists($"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/UseFont.txt"))
+                {
+                    string currentFont = File.ReadAllText($"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/UseFont.txt");
+                    TextMeshFont = File.Exists($@"{EnvironmentHelper.GameRootDirectory}\BepInEx\Translation\fonts\{currentFont}") ? $@"BepInEx\Translation\fonts\{currentFont}" : String.Empty;
+                }
 
                 // Setting language
                 {
@@ -455,9 +464,15 @@ namespace InitSetting
             // Sideloader Modpack Maintainer Mode
             SideloaderMaintainerMode = Directory.Exists($"{GameRootDirectory}\\mods.prod") || Directory.Exists($"{GameRootDirectory}\\mods.test");
 
+<<<<<<< HEAD
             //Framework test
             //IsIpa = File.Exists($"{GameRootDirectory}\\IPA.exe");
             //IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx");
+=======
+            // Framework test
+            IsIpa = File.Exists($"{GameRootDirectory}\\IPA.exe");
+            IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx\\core");
+>>>>>>> upstream/master
 
             //if (IsIpa && IsBepIn)
             //{
@@ -584,7 +599,7 @@ namespace InitSetting
             var currentDirectory = Path.GetDirectoryName(typeof(MainWindow).Assembly.Location) ??
                                    Environment.CurrentDirectory;
             GameRootDirectory = currentDirectory + "\\";
-            ILikeBleeding = $"{EnvironmentHelper.GameRootDirectory}\\UserData\\LauncherEN\\ilikebleeding.txt";
+            ILikeBleeding = $"{EnvironmentHelper.GameRootDirectory}\\BepInEx\\LauncherEN\\ilikebleeding.txt";
 
             Directory.CreateDirectory(GameRootDirectory + _mCustomDir);
 

@@ -464,15 +464,8 @@ namespace InitSetting
             // Sideloader Modpack Maintainer Mode
             SideloaderMaintainerMode = Directory.Exists($"{GameRootDirectory}\\mods.prod") || Directory.Exists($"{GameRootDirectory}\\mods.test");
 
-<<<<<<< HEAD
-            //Framework test
             //IsIpa = File.Exists($"{GameRootDirectory}\\IPA.exe");
-            //IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx");
-=======
-            // Framework test
-            IsIpa = File.Exists($"{GameRootDirectory}\\IPA.exe");
-            IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx\\core");
->>>>>>> upstream/master
+            //IsBepIn = Directory.Exists($"{GameRootDirectory}\\BepInEx\\core");
 
             //if (IsIpa && IsBepIn)
             //{

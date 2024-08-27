@@ -2,9 +2,10 @@
 Launchers for various Japanese adult games from Illusion, but useless disclaimers were stripped, also with some customization.
 A tool made to be more a tool.
 
-![Screenshot](https://i.imgur.com/6KvRJr5.png "Screenshot")
+![Screenshot](https://github.com/user-attachments/assets/41c08d3a-0b88-4215-9872-43423ade1c9f)
 
 # Features
+
 - Fixes corrupt setup.xml on launch.
 - Launcher has options to open all key folders, instead of just character like the vanilla one.
 - Launcher has multiple language options.

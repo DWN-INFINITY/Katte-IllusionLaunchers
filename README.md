@@ -27,12 +27,6 @@ Create a folder in BepInEx named LauncherEN, and place a file named LauncherBG.p
 ### Character Image
 Create a folder in BepInEx named LauncherEN, and place a file named Chara.png there. The image should be 250 x 370 large.
 
-<<<<<<< HEAD
-=======
-### Patreon
-Create a folder in BepInEx named LauncherEN, and place a file named patreon.txt there. File should include a single URL.
-
->>>>>>> upstream/master
 ### Supported Languages
 Languages can be switched at any time in the launcher. The following languages are supported:
 

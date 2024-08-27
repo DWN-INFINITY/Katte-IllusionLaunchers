@@ -94,6 +94,7 @@ namespace InitSetting
                 hs2,
                 aighs2,
                 dhh,
+                new PluginToggle("OfflineMode", "Enable Offline Mode", "Disallows online connectivity, allowing the game to be played offline", "WebRequestBlocker", null, false),
                 new PluginToggle("DHHPH", Localizable.ToggleDhh, Localizable.TooltipDhhPH, "ProjectHighHeel", null, true),
                 new PluginToggle("GgmodForPlayClub", Localizable.ToggleGGmod, Localizable.TooltipGGmod, "GgmodForPlayClub", null, true),
                 new PluginToggle("GgmodForPlayClubStudio", Localizable.ToggleGGmodstudioPC, Localizable.TooltipGGmod, "GgmodForPlayClubStudio", null, true),
@@ -104,13 +105,13 @@ namespace InitSetting
                 new PluginToggle("HoneyPot", Localizable.ToggleHoneyPot, Localizable.TooltipHoneyPot, "HoneyPot", delegate (bool b)
                 {
                     if (b)
-                        MessageBox.Show("When HoneyPot is enabled, the game will use a bit longer to load in some scenes due to checking for HoneySelect assets, making it appear to be freezing for a few seconds. This is completely normal.\n\nJust disable this option again if you would rather not have that freeze.", "Usage");
+                        MessageBox.Show(Localizable.WarningHoneyPot, Localizable.TypeUsage);
                 }, true),
                 new PluginToggle("PHIBL", Localizable.TogglePHIBL, Localizable.TooltipPHIBL, "PHIBL", delegate (bool b)
                 {
                     if (b)
                     {
-                        MessageBox.Show("To use this mod, Press F5 during the game.", "Usage");
+                        MessageBox.Show(Localizable.TooltipGraphicsMod, Localizable.TypeUsage);
                         DisableHelper("PH_PHIBL_PresetLoad_Nyaacho",true,false);
                         DisableHelper("PH_PHIBL_PresetLoad_Original",true,false);
                     }
@@ -124,11 +125,12 @@ namespace InitSetting
                 new PluginToggle("AutoSave", Localizable.ActivateAutosave, "", "*AutoSave", null, false),
                 new PluginToggle("ShortcutPlugin", Localizable.ToggleShortcutHS, "", "ShortcutHSParty", null, true),
                 new PluginToggle("BetterAA", Localizable.BetterAA, "", "*_BetterAA", null, false),
+                new PluginToggle("PovX", "Activate PovX", "", "*PovX", null, false),
                 new PluginToggle("PostProcessingEffects", "Activate PostProcessingEffects", "", "PostProcessingEffect", delegate (bool b)
                 {
                     if (b)
                     {
-                        MessageBox.Show("This mod is known to cause issues saving coordinates, please disable if you're experiencing problems.", "Warning");
+                        MessageBox.Show(Localizable.WarningPostPros, Localizable.TypeWarn);
                         DisableHelper("PostProcessingRuntime",false,false);
                     }
                     else
@@ -140,7 +142,7 @@ namespace InitSetting
                 new PluginToggle("VRMod", Localizable.ToggleVRMod, Localizable.TooltipVRMod, "PlayHomeVR", delegate (bool b)
                 {
                     if (b)
-                        MessageBox.Show("To use this mod, open SteamVR before opening either the main game or studio.", "Usage");
+                        MessageBox.Show(Localizable.WarningPHVR, Localizable.TypeUsage);
                 }, true),
                 new PluginToggle("PCVRMod", Localizable.ToggleVRMod, Localizable.TooltipVRMod, "PlayClubVR", delegate (bool b)
                 {
@@ -226,7 +228,7 @@ namespace InitSetting
                 };
                 toggleConsole.Checked += (sender, args) => EnvironmentHelper.DeveloperModeEnabled = true;
                 toggleConsole.Unchecked += (sender, args) => EnvironmentHelper.DeveloperModeEnabled = false;
-                toggleConsole.ToolTip = "Enable console to see game status console.";
+                toggleConsole.ToolTip = Localizable.TooltipConsole;
                 togglePanel.Children.Add(toggleConsole);
             }
 
@@ -240,7 +242,7 @@ namespace InitSetting
             };
             toggleExperimental.Checked += (sender, args) => EnvironmentHelper.BleedingModeEnabled = true;
             toggleExperimental.Unchecked += (sender, args) => EnvironmentHelper.BleedingModeEnabled = false;
-            toggleExperimental.ToolTip = "Allow installation of experimental mods to this game.";
+            toggleExperimental.ToolTip = Localizable.TooltipBleeding;
             togglePanel.Children.Add(toggleExperimental);
 
             

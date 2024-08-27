@@ -18,7 +18,6 @@ namespace InitSetting
 {
     public static class EnvironmentHelper
     {
-        private static readonly string _mStrSaveDir = "/UserData/setup.xml";
         private static readonly string _mCustomDir = "/BepInEx/LauncherEN";
         private static readonly string _decideLang = "/lang";
         private static readonly string _versioningLoc = "/version";
@@ -79,7 +78,7 @@ namespace InitSetting
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Something went wrong: " + e);
+                    MessageBox.Show(Localizable.SomethingWentWrong + " " + e);
                 }
             }
         }
@@ -101,8 +100,8 @@ namespace InitSetting
                         if (Directory.Exists($"{experimentalDir}Sideloader Modpack - Bleeding Edge"))
                         {
                             if (System.Windows.MessageBox.Show(
-                                    "This will enable experimental updates if any exists for the current game. Please utilize with caution!\n\nDo you want to add experimental zipmods?",
-                                    "Enable experimental mods", MessageBoxButton.YesNo, MessageBoxImage.Question) ==
+                                    Localizable.WarningBleeding,
+                                    Localizable.QuestionBleeding, MessageBoxButton.YesNo, MessageBoxImage.Question) ==
                                 MessageBoxResult.Yes)
                             {
                                 if (!Directory.Exists($"{experimentalDir}"))
@@ -115,8 +114,8 @@ namespace InitSetting
                         else
                         {
                             System.Windows.MessageBox.Show(
-                                "This will enable experimental updates if any exists for the current game. Please utilize with caution!",
-                                "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                                Localizable.InfoBleeding,
+                                Localizable.TypeInfo, MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
                     else
@@ -125,8 +124,8 @@ namespace InitSetting
                         if (Directory.Exists($"{productionModsDir}Sideloader Modpack - Bleeding Edge"))
                         {
                             if (System.Windows.MessageBox.Show(
-                                    "Do you want to move experimental zipmods?\n(They won't be deleted, just moved to another folder and may be reactivated at a later time.)",
-                                    "Disable experimental mods", MessageBoxButton.YesNo, MessageBoxImage.Question) ==
+                                    Localizable.QuestionBleedingDisable,
+                                    Localizable.QuestionBleedingDisableTitle, MessageBoxButton.YesNo, MessageBoxImage.Question) ==
                                 MessageBoxResult.Yes)
                             {
                                 if (!Directory.Exists($"{experimentalDir}"))
@@ -140,7 +139,7 @@ namespace InitSetting
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Something went wrong: " + e);
+                    MessageBox.Show(Localizable.SomethingWentWrong + " " + e);
                 }
             }
         }
@@ -166,7 +165,7 @@ namespace InitSetting
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Something went wrong: " + e);
+                    MessageBox.Show(Localizable.SomethingWentWrong + " " + e);
                 }
 
                 return false;
@@ -203,7 +202,7 @@ namespace InitSetting
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Something went wrong: " + e);
+                    MessageBox.Show(Localizable.SomethingWentWrong + " " + e);
                 }
             }
         }
@@ -228,6 +227,12 @@ namespace InitSetting
         {
             if (IntPtr.Size == 4) return IsWow64();
             return IntPtr.Size == 8;
+        }
+
+        public static void WarnRes(string resText)
+        {
+            if (!resText.Contains("(16 : 9)"))
+                MessageBox.Show(Localizable.RatioWarning, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public static void SetLanguage(string language)
@@ -264,7 +269,7 @@ namespace InitSetting
                         break;
                     case "pt-PT":
                         LangQ_a = "Deseja também definir o idioma do jogo para o idioma selecionado?";
-                        LangQ_b = "Questão";
+                        LangQ_b = "Pergunta";
                         break;
                     case "fr-FR":
                         LangQ_a = "Voulez-vous également définir la langue du jeu sur la langue sélectionnée?";
@@ -300,10 +305,10 @@ namespace InitSetting
                         // Set built-in game language if supported
                         if (builtinIndex >= 0)
                         {
-                            SettingManager.CurrentSettings.Language = builtinIndex;
-                            SettingManager.SaveSettings();
+                            SettingManager.Current.CurrentSettings.Language = builtinIndex;
+                            SettingManager.Current.SaveSettings();
                         }
-                        else if(!File.Exists(
+                        else if (!File.Exists(
                                     $"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/DisableGoogleWarn.txt") &&
                                 !File.Exists(
                                     $"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/DisableGoogle.txt"))
@@ -320,7 +325,7 @@ namespace InitSetting
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong when changing language: " + e);
+                MessageBox.Show(Localizable.SomethingWentWrongLang + " " + e);
             }
         }
 
@@ -328,13 +333,12 @@ namespace InitSetting
         {
             var configPath = Path.Combine(GameRootDirectory, @"BepInEx/Config/AutoTranslatorConfig.ini");
 
-            var disable = language.Equals("jp-JP", StringComparison.OrdinalIgnoreCase);
-
             if (language != "zh-CN" && language != "zh-TW")
                 language = language.Split('-')[0];
 
-            if (File.Exists($"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/DisableGoogle.txt"))
-                disable = true;
+            var isJp = language.Equals("ja", StringComparison.OrdinalIgnoreCase);
+
+            var disable = File.Exists($"{EnvironmentHelper.GameRootDirectory}/BepInEx/Translation/{language}/DisableGoogle.txt");
 
             try
             {
@@ -368,6 +372,13 @@ namespace InitSetting
                             contents[i] = $"Language={language}";
                         else
                             contents.Insert(categoryIndex + 1, $"Language={language}");
+
+                        // If Japanese language is selected, have it auto translate from English
+                        var i2 = contents.FindIndex(categoryIndex, s => s.StartsWith("FromLanguage"));
+                        if (i2 > categoryIndex)
+                            contents[i2] = $"FromLanguage={(isJp ? "en" : "ja")}";
+                        else
+                            contents.Insert(categoryIndex + 1, $"FromLanguage={(isJp ? "en" : "ja")}");
                     }
                     else
                     {
@@ -401,13 +412,13 @@ namespace InitSetting
                     {
                         var i = contents.FindIndex(categoryIndex, s => s.StartsWith("OverrideFont"));
                         if (i > categoryIndex)
-                            contents[i] = $"OverrideFont={Font}";
+                            contents[i] = isJp || disable ? "OverrideFont=" : $"OverrideFont={Font}";
                     }
                     else
                     {
                         contents.Add("");
                         contents.Add("[Behaviour]");
-                        contents.Add(disable ? "OverrideFont=" : $"OverrideFont={Font}");
+                        contents.Add(isJp || disable ? "OverrideFont=" : $"OverrideFont={Font}");
                     }
                 }
                 // Setting TextMeshfont
@@ -417,13 +428,13 @@ namespace InitSetting
                     {
                         var i = contents.FindIndex(categoryIndex, s => s.StartsWith("OverrideFontTextMeshPro"));
                         if (i > categoryIndex)
-                            contents[i] = $"OverrideFontTextMeshPro={TextMeshFont}";
+                            contents[i] = isJp || disable ? "OverrideFontTextMeshPro=" : $"OverrideFontTextMeshPro={TextMeshFont}";
                     }
                     else
                     {
                         contents.Add("");
                         contents.Add("[Behaviour]");
-                        contents.Add(disable ? "OverrideFontTextMeshPro=" : $"OverrideFontTextMeshPro={TextMeshFont}");
+                        contents.Add(isJp || disable ? "OverrideFontTextMeshPro=" : $"OverrideFontTextMeshPro={TextMeshFont}");
                     }
                 }
 
@@ -432,7 +443,7 @@ namespace InitSetting
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong when writing AutoTranslator config file: " + e);
+                MessageBox.Show(Localizable.SomethingWentWrongLang + " " + e);
             }
         }
 
@@ -469,15 +480,15 @@ namespace InitSetting
 
             //if (IsIpa && IsBepIn)
             //{
-            //  MessageBox.Show(
-            //      "Both BepInEx and IPA is detected in the game folder!\n\nApplying both frameworks may cause permanent problems when running the game, making a reinstall needed. Consider uninstalling IPA and using the BepInEx.IPALoader plugin to run your IPA plugins instead.\n\nExiting launcher.",
-            //      "Critical!");
+            //    MessageBox.Show(
+            //        Localizable.WarningFramework,
+            //        Localizable.TypeCritical);
 
-            //   System.Windows.Application.Current.Shutdown();
-            //}
+                //   System.Windows.Application.Current.Shutdown();
+                //}
 
-            // Updater / kkmanager
-            try
+                // Updater / kkmanager
+                try
             {
                 var kkmanFileDir = Path.GetFullPath(GameRootDirectory + _mCustomDir + _kkmdir);
                 // If config file doesn't exist try to find kkmanager inside of game directory
@@ -519,14 +530,14 @@ namespace InitSetting
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Failed to initialize KKManager, please consider reporting this error to developers.\n\n" + ex,
-                    "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Localizable.WarningKKM + ex,
+                    Localizable.TypeCritical, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             if (GameRootDirectory.Length >= 75)
                 MessageBox.Show(
-                    "The game is installed deep in the file system!\n\nThis can cause a variety of errors, so it's recommended that you move it to a shorter path, something like:\n\nC:\\Illusion\\AI.Shoujo",
-                    "Critical warning!");
+                    Localizable.WarningLenght,
+                    Localizable.TypeCritical);
 
             // Customization options
 
@@ -616,11 +627,6 @@ namespace InitSetting
             Thread.CurrentThread.CurrentCulture = Language;
         }
 
-        public static string GetConfigFilePath()
-        {
-            return GameRootDirectory + _mStrSaveDir;
-        }
-
         public static void ShowManual(string manualRoot)
         {
             var manualEn = manualRoot + "manual_en.html";
@@ -628,6 +634,7 @@ namespace InitSetting
             var manualJa = manualRoot + "お読み下さい.html";
 
             Exception ex = null;
+
             if (File.Exists(manualLang))
             {
                 try { Process.Start(manualLang); }
@@ -637,6 +644,10 @@ namespace InitSetting
                 }
                 return;
             }
+
+            if (Language.Name == "ja-JP" && File.Exists(manualJa))
+                goto OpenJa;
+
             if (File.Exists(manualEn))
             {
                 try
@@ -646,6 +657,7 @@ namespace InitSetting
                 }
                 catch (Exception e) { ex = e; }
             }
+        OpenJa:
             if (File.Exists(manualJa))
             {
                 try
@@ -667,7 +679,7 @@ namespace InitSetting
             }
             catch (Exception e) { ex = e; }
 
-            MessageBox.Show("Manual could not be found." + (ex != null ? "\n\n" + ex.Message : ""), "Warning!");
+            MessageBox.Show(Localizable.WarningManual + (ex != null ? "\n\n" + ex.Message : ""), Localizable.TypeWarn);
         }
 
         public static void OpenDirectory(string subDirectory)
@@ -681,7 +693,7 @@ namespace InitSetting
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Could not open the folder: {subDirectory}\n\n{ex.Message}", "Warning!");
+                MessageBox.Show(Localizable.WarningFolder + subDirectory + "\n\n" + ex.Message, Localizable.TypeWarn);
             }
         }
 
@@ -701,7 +713,7 @@ namespace InitSetting
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to start the updater: " + ex, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to start the updater: " + ex, Localizable.TypeWarn, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -722,7 +734,7 @@ namespace InitSetting
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to start the KKManager: " + ex, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to start the KKManager: " + ex, Localizable.TypeWarn, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -743,7 +755,7 @@ namespace InitSetting
             {
                 return StartProcess(new ProcessStartInfo(exePath) { WorkingDirectory = GameRootDirectory }) != null;
             }
-            MessageBox.Show("Executable can't be located", "Warning!");
+            MessageBox.Show("Executable can't be located", Localizable.TypeWarn);
             return false;
         }
 
@@ -756,7 +768,7 @@ namespace InitSetting
         //        Process.Start(text);
         //        return;
         //    }
-        //    MessageBox.Show("Folder could not be found, please launch the game at least once.", "Warning!");
+        //    MessageBox.Show("Folder could not be found, please launch the game at least once.", Localizable.TypeWarn);
         //}
         public static Process StartProcess(string execString)
         {
